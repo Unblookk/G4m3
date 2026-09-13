@@ -57,28 +57,6 @@
     color: #fff;
   }
 
-  #panic-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    background: #0a0a0a;
-    color: #ccc;
-    border: 2px solid #ffffff33;
-    border-radius: 6px;
-    padding: 6px 16px;
-    font-family: inherit;
-    font-size: 13px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  }
-
-  #panic-btn:hover {
-    border-color: #fff;
-    color: #fff;
-  }
-
   .nav-btn.active {
     color: #fff;
     background: #ffffff0d;
@@ -2013,8 +1991,6 @@
 </head>
 <body>
 
-  <button id="panic-btn" onclick="window.location.href='https://launchpad.classlink.com/'" title="Panic button">Panic</button>
-
   <div class="sidebar">
     <div class="logo">G4m3</div>
     <button class="nav-btn active" data-view="home" onclick="showView('home')">Home</button>
@@ -2132,9 +2108,11 @@
         <button class="play-btn" onclick="applyCustomTabDisguise()">Apply</button>
       </div>
       <div class="game-picker-row" style="margin-top:4px;">
-        <button class="game-picker-btn" onclick="applyTabDisguisePreset('docs')">Google Docs</button>
-        <button class="game-picker-btn" onclick="applyTabDisguisePreset('classroom')">Classroom</button>
-        <button class="game-picker-btn" onclick="applyTabDisguisePreset('calc')">Calculator</button>
+        <button class="game-picker-btn" onclick="applyTabDisguisePreset('myapps')">MyApps ClassLink</button>
+        <button class="game-picker-btn" onclick="applyTabDisguisePreset('classroom')">Google Classroom</button>
+        <button class="game-picker-btn" onclick="applyTabDisguisePreset('ixl')">IXL</button>
+        <button class="game-picker-btn" onclick="applyTabDisguisePreset('studyisland')">Study Island</button>
+        <button class="game-picker-btn" onclick="applyTabDisguisePreset('focus')">Focus</button>
         <button class="game-picker-btn" onclick="applyTabDisguisePreset('default')">Reset to G4m3</button>
       </div>
     </section>
@@ -3046,16 +3024,20 @@
   const TAB_DISGUISE_KEY = "g4m3_tab_disguise";
 
   const TAB_ICONS = {
-    docs: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="4" y="2" width="14" height="20" rx="2" fill="%234285F4"/><rect x="7" y="6" width="8" height="1.5" fill="white"/><rect x="7" y="10" width="8" height="1.5" fill="white"/><rect x="7" y="14" width="5" height="1.5" fill="white"/></svg>',
+    myapps: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5" fill="%23888"/><circle cx="12" cy="6" r="2.5" fill="%23888"/><circle cx="18" cy="6" r="2.5" fill="%23888"/><circle cx="6" cy="12" r="2.5" fill="%23888"/><circle cx="12" cy="12" r="2.5" fill="%23888"/><circle cx="18" cy="12" r="2.5" fill="%23888"/><circle cx="6" cy="18" r="2.5" fill="%23888"/><circle cx="12" cy="18" r="2.5" fill="%23888"/><circle cx="18" cy="18" r="2.5" fill="%23888"/></svg>',
     classroom: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="14" rx="2" fill="%2333A853"/><rect x="6" y="19" width="12" height="2" fill="%2333A853"/></svg>',
-    calc: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" fill="%23444"/><rect x="6" y="4" width="12" height="4" fill="%23bfe" /><circle cx="8" cy="12" r="1.3" fill="white"/><circle cx="12" cy="12" r="1.3" fill="white"/><circle cx="16" cy="12" r="1.3" fill="white"/><circle cx="8" cy="16" r="1.3" fill="white"/><circle cx="12" cy="16" r="1.3" fill="white"/><circle cx="16" cy="16" r="1.3" fill="white"/></svg>',
+    ixl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="%23146ec4"/><path d="M7 12l3 3 7-7" stroke="white" stroke-width="2" fill="none"/></svg>',
+    studyisland: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6h8v13H4z" fill="%23c96a1e"/><path d="M20 6h-8v13h8z" fill="%23e08a3c"/></svg>',
+    focus: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="%23555" stroke-width="2"/><circle cx="12" cy="12" r="5.5" fill="none" stroke="%23555" stroke-width="2"/><circle cx="12" cy="12" r="1.5" fill="%23555"/></svg>',
     default: 'data:,'
   };
 
   const TAB_TITLES = {
-    docs: "Untitled document - Google Docs",
+    myapps: "MyApps - ClassLink",
     classroom: "Home",
-    calc: "Calculator",
+    ixl: "IXL - Personalized Learning",
+    studyisland: "Study Island",
+    focus: "Focus",
     default: "G4m3"
   };
 
