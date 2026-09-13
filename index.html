@@ -20,6 +20,7 @@
 
   /* ---------- Top nav bar ---------- */
   .sidebar {
+    position: relative;
     width: 100%;
     flex-shrink: 0;
     background: #050505;
@@ -57,11 +58,11 @@
   }
 
   #panic-btn {
-    position: fixed;
-    top: 8px;
+    position: absolute;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    z-index: 4000;
+    transform: translate(-50%, -50%);
+    z-index: 10;
     background: #0a0a0a;
     color: #ccc;
     border: 2px solid #ffffff33;
