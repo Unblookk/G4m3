@@ -3271,7 +3271,7 @@
   import {
     getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
     signOut, onAuthStateChanged, setPersistence, browserLocalPersistence,
-    GoogleAuthProvider, signInWithPopup, signInAnonymously
+    GoogleAuthProvider, signInWithPopup, signInAnonymously, deleteUser
   } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
   import {
     getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion, arrayRemove, deleteDoc, runTransaction,
@@ -4491,20 +4491,20 @@
 
   async function performUsernameSignUp(username, password) {
     const syntheticEmail = username + USERNAME_DOMAIN;
+    const cred = await createUserWithEmailAndPassword(auth, syntheticEmail, password);
     const usernameRef = doc(db, "usernames", username);
-    await runTransaction(db, async (tx) => {
-      const existing = await tx.get(usernameRef);
-      if (existing.exists()) {
-        throw new Error("That username is already taken.");
-      }
-      tx.set(usernameRef, { email: syntheticEmail, reservedAt: Date.now() });
-    });
     try {
-      const cred = await createUserWithEmailAndPassword(auth, syntheticEmail, password);
+      await runTransaction(db, async (tx) => {
+        const existing = await tx.get(usernameRef);
+        if (existing.exists()) {
+          throw new Error("That username is already taken.");
+        }
+        tx.set(usernameRef, { email: syntheticEmail, uid: cred.user.uid, reservedAt: Date.now() });
+      });
       await setDoc(doc(db, "users", cred.user.uid), { username: username, friends: [] });
-      await setDoc(usernameRef, { email: syntheticEmail, uid: cred.user.uid }, { merge: true });
     } catch (err) {
-      await deleteDoc(usernameRef).catch(() => {});
+      // Username didn't work out — undo the auth account we just created.
+      await deleteUser(cred.user).catch(() => {});
       throw err;
     }
   }
